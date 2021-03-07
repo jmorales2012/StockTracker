@@ -3,29 +3,15 @@ namespace StockTracker
 {
     public class Stock
     {
-        private string ticker, name;
-        double price;
+        public string Symbol { get; set; }
+        public string Name { get; set; }
+        public string Close { get; set; }
 
-        public Stock(string ticker, string name, double price)
+        public Stock(string symbol, string name, string close)
         {
-            this.ticker = ticker;
-            this.name = name;
-            this.price = price;
-        }
-
-        public string GetTicker()
-        {
-            return this.ticker;
-        }
-
-        public string GetName()
-        {
-            return this.name;
-        }
-
-        public double GetPrice()
-        {
-            return this.price;
+            Symbol = symbol;
+            Name = name;
+            Close = close;      // closing price of the stock
         }
     }
 }

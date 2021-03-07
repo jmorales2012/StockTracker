@@ -1,0 +1,27 @@
+﻿<Properties StartupConfiguration="{BC21E6A6-4B46-4B94-9891-EE672D3E214E}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="StockTracker/Watchlist.cs">
+    <Files>
+      <File FileName="StockTracker/Program.cs" Line="47" Column="22" />
+      <File FileName="StockTracker/Stock.cs" />
+      <File FileName="StockTracker/Watchlist.cs" Line="6" Column="23" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="StockTracker" expanded="True">
+            <Node name="StockTracker" expanded="True">
+              <Node name="Watchlist.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.StockTracker PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

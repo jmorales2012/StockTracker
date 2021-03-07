@@ -10,3 +10,10 @@
 /Users/joshua/Library/Mobile Documents/com~apple~CloudDocs/MSSA/CSC205/Week 7/StockTracker/StockTracker/obj/Debug/netcoreapp3.1/StockTracker.dll
 /Users/joshua/Library/Mobile Documents/com~apple~CloudDocs/MSSA/CSC205/Week 7/StockTracker/StockTracker/obj/Debug/netcoreapp3.1/StockTracker.pdb
 /Users/joshua/Library/Mobile Documents/com~apple~CloudDocs/MSSA/CSC205/Week 7/StockTracker/StockTracker/obj/Debug/netcoreapp3.1/StockTracker.genruntimeconfig.cache
+/Users/joshua/Library/Mobile Documents/com~apple~CloudDocs/MSSA/CSC205/Week 7/StockTracker/StockTracker/bin/Debug/netcoreapp3.1/Newtonsoft.Json.dll
+/Users/joshua/Library/Mobile Documents/com~apple~CloudDocs/MSSA/CSC205/Week 7/StockTracker/StockTracker/bin/Debug/netcoreapp3.1/TwelveDataSharp.dll
+/Users/joshua/Library/Mobile Documents/com~apple~CloudDocs/MSSA/CSC205/Week 7/StockTracker/StockTracker/obj/Debug/netcoreapp3.1/StockTracker.csproj.CopyComplete
+/Users/joshua/Library/Mobile Documents/com~apple~CloudDocs/MSSA/CSC205/Week 7/StockTracker/StockTracker/bin/Debug/netcoreapp3.1/System.Net.Http.Formatting.dll
+/Users/joshua/Library/Mobile Documents/com~apple~CloudDocs/MSSA/CSC205/Week 7/StockTracker/StockTracker/bin/Debug/netcoreapp3.1/Newtonsoft.Json.Bson.dll
+/Users/joshua/Library/Mobile Documents/com~apple~CloudDocs/MSSA/CSC205/Week 7/StockTracker/StockTracker/bin/Debug/netcoreapp3.1/RestSharp.dll
+/Users/joshua/Library/Mobile Documents/com~apple~CloudDocs/MSSA/CSC205/Week 7/StockTracker/StockTracker/bin/Debug/netcoreapp3.1/RestSharp.Serializers.Newtonsoft.Json.dll
