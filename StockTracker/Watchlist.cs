@@ -7,6 +7,8 @@ using Newtonsoft.Json;
 using RestSharp.Serialization;
 using RestSharp.Deserializers;
 using RestSharp.Serializers.Newtonsoft.Json;
+using System.Linq;
+using System.IO;
 
 namespace StockTracker
 {
@@ -47,14 +49,59 @@ namespace StockTracker
 
         }
 
-        //public void DeleteStock(Stock stock)
-        //{
-        //    /*
-        //     * Searches for the given stock and deletes it from the watchlist
-        //     * if found. If not found, let user know stock doesn't exist in list.
-        //     */
+        public void DeleteStock(string symbol)
+        {
+            /*
+             * Searches for the given stock and deletes it from the watchlist
+             * if found. If not found, let user know stock doesn't exist in list.
+             */
 
-        //    Stocks.Remove
-        //}
+            var stock = Stocks.SingleOrDefault(s => s.Symbol == symbol);
+            if (stock == null)
+            {
+                Console.WriteLine("Error: Stock not in list.");
+            }
+            else
+            {
+                Stocks.Remove(stock);
+            }
+        }
+
+        public void SortListAlpha()
+        {
+            /*
+             * Sorts the list alphabetically by stock symbols.
+             */
+
+            // use lambda expression for sorting, comparing symbols
+            Stocks.Sort((x, y) => string.Compare(x.Symbol, y.Symbol));
+        }
+
+        public void SortListPrice()
+        {
+            /*
+             * Sorts the list numerically by stock price.
+             */
+
+            Stocks.Sort((x, y) => string.Compare(x.Close, y.Close));
+        }
+
+        public void SaveList()
+        {
+            /*
+             * Save the list to a file. Each stock will be on its own line.
+             * Each property in the stock is separated by a comma.
+             */
+
+            string line;
+            using (StreamWriter writer = new StreamWriter(Name))
+            {
+                foreach (Stock stock in Stocks)
+                {
+                    writer.Write($"{stock.Symbol},{stock.Name},{stock.Close}");
+                    writer.WriteLine();
+                }
+            }
+        }
     }
 }
