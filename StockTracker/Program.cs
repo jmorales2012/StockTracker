@@ -22,8 +22,8 @@ namespace StockTracker
          * Objectives
          *  1. User can input a stock symbol to add to the list
          *  2. User can delete a stock 
-         *  3. App will store stocks and save stocks for continued use
-         *  4. App will display real time pricing for stocks in console
+         *  3. User can save/load watchlists for continued use
+         *  4. User can refresh watchlist for real-time prices
          * 
          * Data Structures
          *  1. Stock - Class
@@ -38,7 +38,6 @@ namespace StockTracker
          *  
          * API Usage
          *  This program uses the twelvedata API to retrieve price quotes.
-         *  API Key: 50445cceeb9540708d2f06e6db3988ff
          *  
          * Todo:
          * [] Handle duplicate entries into list
