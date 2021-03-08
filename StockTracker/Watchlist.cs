@@ -12,6 +12,29 @@ using System.IO;
 
 namespace StockTracker
 {
+    /*
+     * Watchlist Class
+     *  - The watchlist is what holds the stocks that the user requests. You can
+     *    create a new watchlist or load an existing one from a file. You can 
+     *    also add or remove stocks from it and sort the list (by symbol or price)
+     * 
+     * Properties
+     *  - Name: the user-defined name of the list
+     *  - Stocks: a list containing stocks (list instead of array since length
+     *            of list is not known
+     *            
+     * Constructors
+     *  - Watchlist()       -> creates a default watchlist
+     *  - Watchlist(name)   -> creates a watchlist with user-defined name
+     *            
+     * Methods
+     *  - DisplayStocks()   -> displays stocks in watchlist
+     *  - AddStock(symbol)  -> requests stock info from API and adds to list
+     *  - RemoveStock(symbl)-> removes stock from list
+     *  - SortListAlpha()   -> sorts the list by symbol (a to z)
+     *  - SortListPrice()   -> sorts the list by price (least to greatest)
+     *  - SaveList()        -> save the list in a file for later use
+     */
     public class Watchlist
     {
         public string Name { get; set; }
