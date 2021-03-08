@@ -1,6 +1,15 @@
 ﻿using System;
 namespace StockTracker
 {
+    /*
+     * Stock Class
+     *  - The stock class outlines a stock object to be used in the watchlists.
+     * 
+     * Properties
+     *  - Symbol: the stock's symbol (ex: FB, MSFT, GOOG, AAPL)
+     *  - Name: the name of the company (ex: Facebook, Microsoft)
+     *  - Close: the price the stock last closed at (daily)
+     */
     public class Stock
     {
         public string Symbol { get; set; }
