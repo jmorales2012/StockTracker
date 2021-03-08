@@ -41,116 +41,198 @@ namespace StockTracker
          *  API Key: 50445cceeb9540708d2f06e6db3988ff
          *  
          * Todo:
-         * [X] Allow user to input stock symbols into watchlist
          * [] Handle duplicate entries into list
          * [] Separate AddStock into GetStock and AddStock
-         * [X] Delete stock from watchlist
-         * [X] Sort watchlist (by symbol or by price)
-         * [X] Save watchlist to file (streamwriter)
-         * [X] Load watchlist from file (streamreader)
          * [] Update prices (use ?price query to API)
         */
 
         static void Main(string[] args)
         {
-            // create a watchlist object to hold stocks
-            Watchlist watchlist = new Watchlist("Watchlist");
-
-            // Create a stock object and add it to the watchlist
-            //AddStock(watchlist, "AAPL");
-            // Display watchlist stocks
-            //watchlist.DisplayStocks();
-
-            // Create sample list for testing
-            AddStock(watchlist, "AAPL");
-            AddStock(watchlist, "TSLA");
-            AddStock(watchlist, "FB");
-            AddStock(watchlist, "AMZN");
-
-            //// Ask user to input stock
-            //AddStock(watchlist, GetUserAdd());
-            //watchlist.DisplayStocks();
-
-            //// Ask user to delete stock
-            //watchlist.DeleteStock(GetUserDelete());
-            //watchlist.DisplayStocks();
-
-            // Sort the watchlist
-            //watchlist.SortListAlpha();
-            //watchlist.DisplayStocks();
-            //watchlist.SaveList();
-
-            // Load a watchlist
-            //Watchlist loaded = LoadWatchList(GetUserList());
-            //loaded.DisplayStocks();
-
-            DisplayMenu();
+            // display watchlist menu and get user selection
+            DisplayWatchlistMenu();
+            //Watchlist watchlist = new Watchlist();
+            Watchlist watchlist = GetWatchlist();
+            HandleStockMenuSelection(watchlist);
         }
 
-        public static int DisplayMenu()
+
+        public static void DisplayWatchlistMenu()
         {
             /*
-             * Display app menu and ask for user selection.
-             * Ensure input is a valid selection.
+             * Display first menu to select a watchlist to work with.
              */
-            int userInput = 0;
 
-            while (userInput < 1 || userInput > 5)
+            Console.Clear();
+            Console.WriteLine("\nWelcome to Stock Tracker. Keep track of all your stocks right here!\n");
+            Console.WriteLine("Menu");
+            Console.WriteLine("1. Create a new watchlist");
+            Console.WriteLine("2. Load an existing watchlist");
+            Console.WriteLine("0. Exit program\n");
+        }
+
+
+        public static Watchlist GetWatchlist()
+        {
+            /*
+             * Creates/loads the watchlist given by the user and returns it.
+             */
+
+            Watchlist watchlist = new Watchlist();
+            int input;
+            string output = "Enter your selection: ";
+
+            do
             {
-                //Console.Clear();
-                Console.WriteLine("Welcome to Stock Tracker. Keep track of all your stocks right here!\n");
-                Console.WriteLine("Menu");
-                Console.WriteLine("1. Create a watchlist");
-                Console.WriteLine("2. Add a stock to your watchlist");
-                Console.WriteLine("3. Delete a stock from your watchlist");
-                Console.WriteLine("4. Save your watchlist");
-                Console.WriteLine("5. Delete your watchlist");
+                Console.Write(output);
+                input = GetInput();
 
-                userInput = Convert.ToInt32(Console.ReadLine());
-                if (userInput < 1 || userInput > 5)
+                switch (input)
                 {
-                    Console.WriteLine("Please enter a valid selection.");
+                    case 0:
+                        ExitProgram();
+                        Environment.Exit(0);
+                        break;
+                    case 1:
+                        return CreateWatchlist();
+                    case 2:
+                        Console.Write("\nEnter watchlist to load: ");
+                        string watchlist_name = Console.ReadLine();
+                        return LoadWatchList(watchlist_name);
+                    default:
+                        output = "Please enter a valid selection: ";
+                        break;
                 }
+
+            } while (input < 0 || input > 2);
+
+            return watchlist;
+        }
+
+
+        public static void DisplayStockMenu()
+        {
+            /*
+             * Display second menu to add/delete stocks, save watchlist, or
+             * exit the program.
+             */
+
+            Console.WriteLine("\nStock Menu");
+            Console.WriteLine("1. Add a stock to your list");
+            Console.WriteLine("2. Remove a stock from your list");
+            Console.WriteLine("3. Sort watchlist by symbol (A to Z)");
+            Console.WriteLine("4. Sort watchlist by price ($ to $$$)");
+            Console.WriteLine("5. Save your watchlist");
+            Console.WriteLine("0. Exit program\n");
+        }
+
+
+        public static void HandleStockMenuSelection(Watchlist watchlist)
+        {
+            /*
+             * Handles the input for the stock menu selection.
+             */
+
+            string output = "Enter your selection: ";
+            int input;
+
+            // display stock menu and get user selection
+            do
+            {
+                Console.Clear();
+                watchlist.DisplayStocks();
+                DisplayStockMenu();
+                Console.Write(output);
+                input = GetInput();
+
+                switch (input)
+                {
+                    case 0:
+                        ExitProgram();
+                        Environment.Exit(0);
+                        break;
+                    case 1:
+                        Console.Write("Enter stock symbol: ");
+                        output = watchlist.AddStock(Console.ReadLine());
+                        break;
+                    case 2:
+                        Console.Write("Enter a stock symbol to remove: ");
+                        output = watchlist.RemoveStock(Console.ReadLine());
+                        break;
+                    case 3:
+                        watchlist.SortListAlpha();
+                        output = "Watchlist sorted by symbol!";
+                        break;
+                    case 4:
+                        watchlist.SortListPrice();
+                        output = "Watchlist sorted by price!";
+                        break;
+                    case 5:
+                        watchlist.SaveList();
+                        output = "List saved!";
+                        break;
+                    default:
+                        output = "Please enter a valid selection.";
+                        break;
+                }
+
+                output += "\n\nEnter your selection: ";
+
+            } while (input != 0);
+        }
+
+
+        public static int GetInput()
+        {
+            int input;
+
+            try
+            {
+                input = Convert.ToInt32(Console.ReadLine());
+            }
+            catch
+            {
+                input = -1;
             }
 
-            return userInput;
+            return input;
         }
 
-        public static string GetUserAdd()
+
+        public static void ExitProgram()
         {
-            Console.Write("Enter a stock symbol to add to your watchlist: ");
-            return Console.ReadLine();
+            /*
+             * Displays farewell greeting to user and exits program.
+             */
+
+            Console.WriteLine("\nThanks for using Stock Watcher! Have a great day!");
         }
 
-        public static string GetUserDelete()
+
+        public static Watchlist CreateWatchlist()
         {
-            Console.Write("Enter a stock symbol to delete from your watchlist: ");
-            return Console.ReadLine();
+            Console.Write("Enter a name for your watchlist: ");
+            return new Watchlist(Console.ReadLine());
         }
 
-        public static string GetUserList()
-        {
-            Console.Write("Enter a watchlist to load: ");
-            return Console.ReadLine();
-        }
 
-        public static Watchlist LoadWatchList(string list)
+        public static Watchlist LoadWatchList(string watchlist_name)
         {
             /*
              * Load a given watchlist. 
-             * 1: Look for the file. If not found, error.
+             * 1: Look for the file. If not found, create a new watchlist.
              * 2: If found, create a watchlist with the given name.
              * 3: Read the file, each line is a new stock. 
              * 4: Split each line by commas to get stock properties.
              * 5: Create each stock and add to the watchlist.
+             * 6. If not fou
              * 6: Return the watchlist.
              */
 
             try
             {
                 string line;
-                TextReader reader = new StreamReader(list);
-                Watchlist watchlist = new Watchlist(list);
+                TextReader reader = new StreamReader(watchlist_name);
+                Watchlist watchlist = new Watchlist(watchlist_name);
 
                 while (true)
                 {
@@ -159,8 +241,17 @@ namespace StockTracker
 
                     // insert logic to split the line and create a stock
                     string[] stockProps = line.Split(',');
-                    Stock stock = new Stock(stockProps[0], stockProps[1], stockProps[2]);
-                    watchlist.AddStock(stock);
+
+                    if (stockProps.Length < 3)
+                    {
+                        // get name from saved watchlist
+                        watchlist.Name = stockProps[0];
+                    }
+                    else
+                    {
+                        // add each stock to watchlist
+                        watchlist.AddStock(stockProps[0], stockProps[1], stockProps[2]);
+                    }
                 }
                 reader.Close();
 
@@ -168,50 +259,10 @@ namespace StockTracker
             }
             catch
             {
-                Console.WriteLine("Watchlist not found. Creating one now.");
-                return new Watchlist("Watchlist");
+                Console.WriteLine("Watchlist not found. Creating a new one.");
+                return new Watchlist(watchlist_name);
             }
             
-        }
-
-        /*
-         * Uncomment below method for production. Using dev method so I don't 
-         * go over on API requests.
-         */
-        //public static void AddStock(Watchlist watchlist, string symbol)
-        //{
-        //    /*
-        //     * Gets the stock from the API and adds it to the watchlist. 
-        //     * API allows 5 requests per minute or 500/day.
-        //     * Separate into two methods: GetStock and AddStock
-        //     */
-
-        //    // Setup new client and request the JSON object from the API
-        //    var client = new RestClient($"https://api.twelvedata.com/quote?symbol={symbol}&apikey=50445cceeb9540708d2f06e6db3988ff");
-        //    var request = new RestSharp.RestRequest();
-        //    var response = client.Get(request);
-
-        //    if (response.IsSuccessful)
-        //    {
-        //        // create a new stock object from the returned JSON object
-        //        Stock stock = JsonConvert.DeserializeObject<Stock>(response.Content);
-
-        //        // add new stock to watchlist
-        //        watchlist.AddStock(stock);
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine("Failed");
-        //    }
-        //}
-
-        /*
-         * Dev method below is only for dev use so you don't go over on API requests.
-         */
-        public static void AddStock(Watchlist watchlist, string symbol)
-        {
-            Stock stock = new Stock(symbol, "Test Name", "123.45");
-            watchlist.AddStock(stock);
         }
     }
 }
