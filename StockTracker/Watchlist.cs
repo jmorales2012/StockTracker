@@ -34,6 +34,7 @@ namespace StockTracker
      *  - SortListAlpha()   -> sorts the list by symbol (a to z)
      *  - SortListPrice()   -> sorts the list by price (least to greatest)
      *  - SaveList()        -> save the list in a file for later use
+     *  - RefreshPrices()   -> refreshes the prices of the stocks in list
      */
     public class Watchlist
     {
@@ -205,6 +206,21 @@ namespace StockTracker
                     writer.Write($"{stock.Symbol},{stock.Name},{stock.Close}");
                     writer.WriteLine();
                 }
+            }
+        }
+
+        public void UpdatePrices()
+        {
+            /*
+             * Refreshes the prices for the first 5 stocks. Only the first 5
+             * because of API limitations.
+             */
+            int max;
+            max = Stocks.Count < 5 ? Stocks.Count : 5;
+
+            for (int i = 0; i < max; i++)
+            {
+                Stocks[i].UpdatePrice();
             }
         }
     }

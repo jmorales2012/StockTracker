@@ -40,9 +40,8 @@ namespace StockTracker
          *  This program uses the twelvedata API to retrieve price quotes.
          *  
          * Todo:
-         * [] Handle duplicate entries into list
-         * [] Separate AddStock into GetStock and AddStock
-         * [] Update prices (use ?price query to API)
+         * [] Handle duplicate entries
+         * [] Get more info related to the stock (net change, % change)
         */
 
         static void Main(string[] args)
@@ -118,9 +117,10 @@ namespace StockTracker
             Console.WriteLine("\nStock Menu");
             Console.WriteLine("1. Add a stock to your list");
             Console.WriteLine("2. Remove a stock from your list");
-            Console.WriteLine("3. Sort watchlist by symbol (A to Z)");
-            Console.WriteLine("4. Sort watchlist by price ($ to $$$)");
-            Console.WriteLine("5. Save your watchlist");
+            Console.WriteLine("3. Refresh stock prices");
+            Console.WriteLine("4. Sort watchlist by symbol (A to Z)");
+            Console.WriteLine("5. Sort watchlist by price ($ to $$$)");
+            Console.WriteLine("6. Save your watchlist");
             Console.WriteLine("0. Exit program\n");
         }
 
@@ -158,14 +158,18 @@ namespace StockTracker
                         output = watchlist.RemoveStock(Console.ReadLine());
                         break;
                     case 3:
+                        watchlist.UpdatePrices();
+                        output = "Prices updated!";
+                        break;
+                    case 4:
                         watchlist.SortListAlpha();
                         output = "Watchlist sorted by symbol!";
                         break;
-                    case 4:
+                    case 5:
                         watchlist.SortListPrice();
                         output = "Watchlist sorted by price!";
                         break;
-                    case 5:
+                    case 6:
                         watchlist.SaveList();
                         output = "List saved!";
                         break;
@@ -258,7 +262,9 @@ namespace StockTracker
             }
             catch
             {
-                Console.WriteLine("Watchlist not found. Creating a new one.");
+                Console.WriteLine("\nWatchlist not found. Creating a new one.");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadLine();
                 return new Watchlist(watchlist_name);
             }
             
